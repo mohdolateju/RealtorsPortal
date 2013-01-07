@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="AdDetailFormBean" type="com.myapp.bean.AdDetailFormBean"/>
+        <form-bean name="NewSubPackageFormBean" type="com.myapp.bean.NewSubPackageFormBean"/>
+        <form-bean name="SubPackageFormBean" type="com.myapp.bean.load.LoadSubPackageFormBean"/>
+        <form-bean name="LoadTransactLog" type="com.myapp.bean.load.LoadTransactLogFormBean"/>
+        <form-bean name="AdFormFormBean" type="com.myapp.bean.AdFormFormBean"/>
+        <form-bean name="PsellerChangePasswordFormBean" type="com.myapp.bean.PsellerChangePasswordFormBean"/>
+        <form-bean name="AgentChangePasswordFormBean" type="com.myapp.bean.AgentChangePasswordFormBean"/>
+        <form-bean name="AdminChangePasswordFormBean" type="com.myapp.bean.AdminChangePasswordFormBean"/>
+        <form-bean name="PsellerUpdateProfileFormBean" type="com.myapp.bean.PsellerUpdateProfileFormBean"/>
+        <form-bean name="AgentUpdateProfileFormBean" type="com.myapp.bean.AgentUpdateProfileFormBean"/>
+        <form-bean name="AdminUpdateProfileFormBean" type="com.myapp.bean.AdminUpdateProfileFormBean"/>
+        <form-bean name="RegistrationFormBean" type="com.myapp.bean.RegistrationFormBean"/>
+        <form-bean name="LoginFormBean" type="com.myapp.bean.LoginFormBean"/>
+    
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="success" path="/registration.jsp"/>
+    </global-forwards>
+
+    <action-mappings>
+        <action input="/login.jsp" name="LoginFormBean" path="/login"
+        scope="request" type="com.myapp.action.LoginAction">
+            <forward name="admin" path="/WEB-INF/admin/index.jsp"/>
+            <forward name="privateseller" path="/WEB-INF/privateseller/index.jsp"/>
+            <forward name="agent" path="/WEB-INF/agent/index.jsp"/>
+        </action>
+        <action path="/LoadRegister" type="com.myapp.action.load.LoadRegAction">
+        </action>
+        <action path="/privateseller_profile" type="com.myapp.action.load.PsellerLoadProfileAction">
+        <forward name="success" path="/WEB-INF/privateseller/profile.jsp"/>
+        </action>
+        <action path="/agent_profile" type="com.myapp.action.load.AgentLoadProfileAction">
+        <forward name="success" path="/WEB-INF/agent/profile.jsp"/>
+        </action>
+        <action path="/admin_profile" type="com.myapp.action.load.AdminLoadProfileAction">
+        <forward name="success" path="/WEB-INF/admin/profile.jsp"/>
+        </action>
+        <action path="/load_ads" type="com.myapp.action.load.LoadAdsAction">
+        <forward name="success" path="/WEB-INF/ads_page.jsp"/>
+        </action>
+        <action input="/WEB-INF/privateseller/profile.jsp" name="PsellerUpdateProfileFormBean"
+        path="/updateprofile" scope="session" type="com.myapp.action.PsellerUpdateProfileAction">
+        <forward name="success" path="/WEB-INF/privateseller/profile.jsp"/>
+        </action>
+        <action input="/WEB-INF/agent/profile.jsp" name="AgentUpdateProfileFormBean"
+        path="/agentupdateprofile" scope="session" type="com.myapp.action.AgentUpdateProfileAction">
+        <forward name="success" path="/WEB-INF/agent/profile.jsp"/>
+        </action>
+        <action input="/WEB-INF/admin/profile.jsp" name="AdminUpdateProfileFormBean"
+        path="/adminupdateprofile" scope="session" type="com.myapp.action.AdminUpdateProfileAction">
+        <forward name="success" path="/WEB-INF/admin/profile.jsp"/>
+        </action>
+        <action input="/WEB-INF/privateseller/profile.jsp" name="PsellerChangePasswordFormBean"
+        path="/psellerchangepassword" scope="session" type="com.myapp.action.PsellerChangePasswordAction">
+        <forward name="success" path="/WEB-INF/privateseller/profile.jsp"/>
+        </action>
+        <action input="/WEB-INF/agent/profile.jsp" name="AgentChangePasswordFormBean"
+        path="/agentchangepassword" scope="session" type="com.myapp.action.AgentChangePasswordAction">
+        <forward name="success" path="/WEB-INF/agent/profile.jsp"/>
+        </action>
+        <action input="/WEB-INF/admin/profile.jsp" name="AdminChangePasswordFormBean"
+        path="/adminchangepassword" scope="session" type="com.myapp.action.AdminChangePasswordAction">
+        <forward name="success" path="/WEB-INF/admin/profile.jsp"/>
+        </action>
+        <action path="/logout" type="com.myapp.action.LogoutAction">
+            <forward name="success" path="/index.jsp"/>
+        </action>
+        <action path="/privatesellersection" type="com.myapp.action.privatesellersection">
+            <forward name="success" path="/WEB-INF/privateseller/index.jsp"/>
+        </action>
+        <action path="/adminsection" type="com.myapp.action.AdminSection">
+            <forward name="success" path="/WEB-INF/admin/index.jsp"/>
+        </action>
+        <action path="/agentsection" type="com.myapp.action.AgentSection">
+            <forward name="success" path="/WEB-INF/agent/index.jsp"/>
+        </action>
+        <action path="/showPrices" type="com.myapp.action.ShowPricesAction"/>
+        <action input="/registration.jsp" name="RegistrationFormBean" path="/register"
+        scope="request" type="com.myapp.action.RegistrationAction">
+        <forward name="success" path="/login.jsp"/>
+        </action>
+        <action path="/newad" type="com.myapp.action.NewAdAction">
+        <forward name="success" path="/WEB-INF/ads_form.jsp"/>
+        </action>
+        <action input="/WEB-INF/ads_form.jsp" name="AdFormFormBean" path="/adformaction" scope="session"
+        type="com.myapp.action.AdFormAction">
+            <forward name="success" path="/privateseller_ads.do" redirect="true"/>
+        </action>
+        <action input="/ad_detail.jsp" name="AdDetailFormBean" path="/ad_detail" type="com.myapp.action.AdDetailAction" scope="session">
+                 <forward name="success" path="/ad_detail.jsp"/>
+        </action>
+        <action name="LoadTransactLog" path="/adminloadtransactaction" scope="session"
+        type="com.myapp.action.load.AdminLoadTransactAction">
+        <forward name="success" path="/WEB-INF/admin/transactlog.jsp"/>
+        </action>
+        <action name="LoadSubPackageFormBean" path="/adminloadsubpackageaction" scope="session"
+        type="com.myapp.action.load.AdminLoadSubPackageAction">
+        <forward name="success" path="/WEB-INF/admin/subpackage.jsp"/>
+        </action>
+        <action path="/all_ads" type="com.myapp.action.AllAdsAction">
+        <forward name="success" path="/allads_page.jsp"/>
+        </action>
+        <action input="/WEB-INF/admin/NewSubPackage.jsp" name="NewSubPackageFormBean"
+        path="/newsubpackageaction" scope="session" type="com.myapp.action.NewSubPackageAction">
+         <forward name="success" path="/adminloadsubpackageaction.do"/>
+        </action>
+        <action path="/loadnewpackagepage" type="com.myapp.action.LoadNewPackagePage">
+            <forward name="success" path="/WEB-INF/admin/NewSubPackage.jsp"/>
+        </action>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
